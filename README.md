@@ -31,6 +31,17 @@ npm run deploy:test
 
 Потрібні Hugo 0.146+ і змінна `CLOUDFLARE_API_TOKEN` з правом Cloudflare Pages: Edit.
 
+### Тестова версія на Workers
+
+Тестова адреса: https://thermoking-com-ua-test.thermoking-com-ua.workers.dev (закрита від індексації).
+Сайт пакується в один Worker скриптом `scripts/build_worker.py`. Щоб перевикласти:
+
+```bash
+CLOUDFLARE_ACCOUNT_ID=<id> CLOUDFLARE_API_TOKEN=<token> ./scripts/deploy-test-worker.sh
+```
+
+Токену потрібне право Workers Scripts: Edit.
+
 ## Що ще не підключено
 
 Форми зараз лише показують повідомлення «Дякуємо». Перед запуском їх треба підключити до пошти, CRM або Telegram, наприклад через Cloudflare Pages Functions.

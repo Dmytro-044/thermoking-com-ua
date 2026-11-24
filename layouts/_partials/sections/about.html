@@ -1,0 +1,20 @@
+{{- $d := hugo.Data.site -}}
+<section class="section section--frost" id="about" aria-labelledby="why-title">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">Чому {{ $d.company.name }} {{ $d.company.tagline }}</p>
+      <h2 class="h2" id="why-title">Офіційний дилер — це не просто статус</h2>
+    </div>
+    <div class="why">
+      {{- range $d.why }}
+      <div class="why__item">
+        <h3>{{ .title }}</h3>
+        <p>{{ .text }}</p>
+      </div>
+      {{- end }}
+    </div>
+    {{- with $d.quote }}
+    <blockquote class="quote"><p>{{ . }}</p></blockquote>
+    {{- end }}
+  </div>
+</section>

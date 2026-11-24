@@ -156,7 +156,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   background:
     linear-gradient(100deg, rgba(6,18,38,.9) 0%, rgba(6,18,38,.62) 40%, rgba(6,18,38,.12) 72%, rgba(6,18,38,.3) 100%),
     linear-gradient(0deg, rgba(6,18,38,.85) 0%, rgba(6,18,38,0) 35%),
-    url("../img/hero-frost.jpg") center / cover no-repeat;
+    var(--hero-img) center / cover no-repeat;
   transform: scale(1.04);
   animation: heroDrift 26s ease-in-out infinite alternate;
 }
@@ -356,7 +356,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* ---------- final CTA ---------- */
 .cta { position: relative; color: #fff; isolation: isolate; overflow: hidden; padding-block: clamp(64px, 8vw, 120px); background: var(--ink-900); }
-.cta__bg { position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(6,18,38,.96) 30%, rgba(6,18,38,.7)), url("../img/hero-frost.jpg") center 70% / cover no-repeat; }
+.cta__bg { position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(6,18,38,.96) 30%, rgba(6,18,38,.7)), var(--hero-img) center 70% / cover no-repeat; }
 .cta__inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 480px); gap: clamp(32px, 5vw, 72px); align-items: start; }
 .cta__copy > p:not(.eyebrow) { margin-top: 18px; color: #c6d4e6; font-size: 17px; max-width: 52ch; }
 .contact-cards { margin-top: 32px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }

@@ -1,0 +1,22 @@
+{{- $d := hugo.Data.site -}}
+<section class="section" aria-labelledby="faq-title">
+  <div class="container faq">
+    <div class="faq__head">
+      <p class="eyebrow">Питання та відповіді</p>
+      <h2 class="h2" id="faq-title">Часті запитання</h2>
+      <p class="muted">Не знайшли відповідь? Телефонуйте <a href="tel:{{ $d.contacts.phone_href }}">{{ $d.contacts.phone }}</a>.</p>
+    </div>
+    <div class="faq__list">
+      {{- range $d.faq }}
+      <details>
+        <summary>{{ .q }}</summary>
+        <p>{{ .a }}</p>
+      </details>
+      {{- end }}
+    </div>
+  </div>
+</section>
+{{- /* FAQ structured data for search engines */}}
+{{- $items := slice }}
+{{- range $d.faq }}{{ $items = $items | append (dict "@type" "Question" "name" .q "acceptedAnswer" (dict "@type" "Answer" "text" .a)) }}{{ end }}
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@type" "FAQPage" "mainEntity" $items | jsonify | safeJS }}</script>

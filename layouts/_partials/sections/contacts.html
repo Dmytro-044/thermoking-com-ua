@@ -1,0 +1,29 @@
+{{- $d := hugo.Data.site -}}
+{{- $c := $d.contacts -}}
+<section class="cta" id="contacts" aria-labelledby="cta-title">
+  <div class="cta__bg" aria-hidden="true"></div>
+  <div class="container cta__inner">
+    <div class="cta__copy">
+      <p class="eyebrow eyebrow--light">Контакти</p>
+      <h2 class="h2" id="cta-title">Залишилось обрати зручний час</h2>
+      <p>Залиште заявку або зателефонуйте — підкажемо найближчу станцію й підготуємо запчастини до вашого приїзду.</p>
+      <ul class="contact-cards">
+        <li><span>Сервіс і продаж</span><a href="tel:{{ $c.phone_href }}">{{ $c.phone }}</a></li>
+        <li><span>Загальні питання</span><a href="mailto:{{ $c.email }}">{{ $c.email }}</a></li>
+        <li><span>Запчастини</span><a href="mailto:{{ $c.parts_email }}">{{ $c.parts_email }}</a></li>
+        <li><span>Головний офіс</span><p>{{ $c.address }}<br>{{ $c.hours }}</p></li>
+      </ul>
+    </div>
+    <form class="quick-form quick-form--solid" data-form aria-label="Заявка на сервіс" novalidate>
+      <div class="quick-form__head"><h3>Заявка на сервіс</h3><p>Відповідаємо в робочий час</p></div>
+      <div class="field-row">
+        <label class="field"><span>Ім'я</span><input name="name" autocomplete="name" required></label>
+        <label class="field"><span>Телефон</span><input name="phone" type="tel" autocomplete="tel" placeholder="+380" required></label>
+      </div>
+      <label class="field"><span>Модель установки (якщо відома)</span><input name="model" placeholder="Напр., T-1000R"></label>
+      <label class="field"><span>Коментар</span><textarea name="msg" rows="3" placeholder="Що сталося або яка послуга потрібна"></textarea></label>
+      <button class="btn btn--primary btn--block" type="submit">Надіслати заявку</button>
+      <p class="form-success" role="status" hidden>Дякуємо! Заявку прийнято — ми зателефонуємо найближчим часом.</p>
+    </form>
+  </div>
+</section>

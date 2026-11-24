@@ -1,0 +1,37 @@
+{{- $d := hugo.Data.site -}}
+{{- $art := dict
+  "van" `<path d="M20 30h95l20 18h25v22H20z" class="b"/><rect x="40" y="18" width="34" height="12" rx="3" class="u"/><circle cx="50" cy="72" r="9" class="w"/><circle cx="150" cy="72" r="9" class="w"/>`
+  "truck" `<rect x="12" y="20" width="118" height="46" rx="3" class="b"/><path d="M130 34h28l18 16v16h-46z" class="b"/><rect x="14" y="10" width="30" height="10" rx="2" class="u"/><circle cx="40" cy="72" r="9" class="w"/><circle cx="64" cy="72" r="9" class="w"/><circle cx="160" cy="72" r="9" class="w"/>`
+  "trailer" `<rect x="6" y="14" width="150" height="50" rx="3" class="b"/><rect x="0" y="22" width="8" height="30" rx="2" class="u"/><path d="M156 40h20l14 12v14h-34z" class="b"/><circle cx="104" cy="72" r="8" class="w"/><circle cx="124" cy="72" r="8" class="w"/><circle cx="176" cy="72" r="8" class="w"/>`
+  "bus" `<rect x="10" y="22" width="180" height="44" rx="10" class="b"/><rect x="60" y="13" width="70" height="9" rx="3" class="u"/><circle cx="46" cy="72" r="9" class="w"/><circle cx="156" cy="72" r="9" class="w"/>`
+-}}
+<section class="section section--frost" id="equipment" aria-labelledby="eq-title">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">Обладнання Thermo King</p>
+      <h2 class="h2" id="eq-title">Рішення для будь-якого транспорту</h2>
+      <p class="section__lede">Підбираємо холодильно-опалювальну установку під тип кузова, вантаж і температурний режим — від свіжих продуктів до глибокої заморозки та фармацевтики.</p>
+    </div>
+    <div class="equip">
+      {{- range $d.equipment }}
+      <article class="equip__card">
+        <div class="equip__art" aria-hidden="true"><svg viewBox="0 0 200 90">{{ index $art .art | safeHTML }}</svg></div>
+        <p class="equip__tag">{{ .tag }}</p>
+        <h3>{{ .title }}</h3>
+        <p>{{ .text }}</p>
+        <a class="link-arrow" href="#request">{{ .cta }}</a>
+      </article>
+      {{- end }}
+    </div>
+    {{- with $d.feature }}
+    <aside class="feature-band">
+      <div class="feature-band__copy">
+        <p class="eyebrow eyebrow--light">{{ .eyebrow }}</p>
+        <h3>{{ .title }}</h3>
+        <p>{{ .text }}</p>
+      </div>
+      <a class="btn btn--light" href="#request">{{ .cta }}</a>
+    </aside>
+    {{- end }}
+  </div>
+</section>

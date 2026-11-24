@@ -1,0 +1,40 @@
+{{- $d := hugo.Data.site -}}
+{{- $c := $d.contacts -}}
+{{- $home := "/" | relURL -}}
+<div class="utilitybar">
+  <div class="container utilitybar__inner">
+    <p class="utilitybar__note"><span class="dot dot--live" aria-hidden="true"></span>Сервісні станції у {{ len $d.stations }} містах України</p>
+    <ul class="utilitybar__links">
+      <li><span class="muted">{{ $c.hours }}</span></li>
+      <li><a href="mailto:{{ $c.email }}">{{ $c.email }}</a></li>
+      <li class="lang"><a href="{{ $home }}" aria-current="true">UA</a><span aria-hidden="true">/</span><a href="{{ $home }}">EN</a></li>
+    </ul>
+  </div>
+</div>
+
+<header class="header" data-header>
+  <div class="container header__inner">
+    {{ partial "brand.html" dict }}
+    <nav class="nav" id="nav" aria-label="Головне меню">
+      <ul class="nav__list">
+        {{- range $d.nav }}
+        <li><a href="{{ $home }}{{ .href }}">{{ .label }}</a></li>
+        {{- end }}
+      </ul>
+      <div class="nav__mobile-extra">
+        <a class="btn btn--primary btn--block" href="{{ $home }}#request">Записатися на сервіс</a>
+        <a class="btn btn--ghost-dark btn--block" href="tel:{{ $c.phone_href }}">{{ $c.phone }}</a>
+      </div>
+    </nav>
+    <div class="header__actions">
+      <a class="header__phone" href="tel:{{ $c.phone_href }}" aria-label="Подзвонити: {{ $c.phone }}">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z" fill="currentColor"/></svg>
+        <span>{{ $c.phone }}</span>
+      </a>
+      <a class="btn btn--primary btn--sm header__cta" href="{{ $home }}#request">Записатися на сервіс</a>
+      <button class="burger" type="button" aria-controls="nav" aria-expanded="false" aria-label="Відкрити меню" data-burger>
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>

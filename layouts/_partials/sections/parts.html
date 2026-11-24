@@ -1,0 +1,26 @@
+{{- $d := hugo.Data.site -}}
+<section class="section" id="parts" aria-labelledby="parts-title">
+  <div class="container">
+    <div class="parts">
+      <div class="parts__copy">
+        <p class="eyebrow">Запчастини</p>
+        <h2 class="h2" id="parts-title">Оригінальні запчастини Thermo King</h2>
+        <p>{{ $d.parts.text }}</p>
+        <ul class="checklist">{{ range $d.parts.checklist }}<li>{{ . }}</li>{{ end }}</ul>
+      </div>
+      <form class="parts__search" data-form aria-label="Запит на запчастину" novalidate>
+        <label class="field field--light">
+          <span>Номер деталі, модель або серійний номер</span>
+          <input name="part" placeholder="Напр., SLXi 300 або 11-9955" required>
+        </label>
+        <label class="field field--light">
+          <span>Телефон або e-mail для відповіді</span>
+          <input name="contact" placeholder="+380 або name@company.ua" required>
+        </label>
+        <button class="btn btn--primary btn--block" type="submit">Запитати наявність і ціну</button>
+        <p class="parts__direct">Відділ запчастин: <a href="mailto:{{ $d.contacts.parts_email }}">{{ $d.contacts.parts_email }}</a></p>
+        <p class="form-success" role="status" hidden>Запит надіслано. Менеджер відділу запчастин зв'яжеться з вами.</p>
+      </form>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,29 @@
+{{- $d := hugo.Data.site -}}
+<section class="section" id="service" aria-labelledby="srv-title">
+  <div class="container">
+    <div class="section__head section__head--row">
+      <div>
+        <p class="eyebrow">Сервіс</p>
+        <h2 class="h2" id="srv-title">Обслуговування, що береже вантаж і нерви</h2>
+      </div>
+      <p class="section__aside">Сертифіковані інженери, оригінальні запчастини й діагностичне обладнання виробника.</p>
+    </div>
+    <div class="services">
+      {{- range $i, $s := $d.services }}
+      <article class="service">
+        <span class="service__num">{{ printf "%02d" (add $i 1) }}</span>
+        <h3>{{ $s.title }}</h3>
+        <p>{{ $s.text }}</p>
+      </article>
+      {{- end }}
+    </div>
+    <div class="process">
+      <h3 class="process__title">Як проходить сервіс</h3>
+      <ol class="process__steps">
+        {{- range $d.process }}
+        <li><strong>{{ .title }}</strong><span>{{ .text }}</span></li>
+        {{- end }}
+      </ol>
+    </div>
+  </div>
+</section>

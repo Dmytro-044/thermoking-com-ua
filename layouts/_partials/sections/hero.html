@@ -1,0 +1,56 @@
+{{- $d := hugo.Data.site -}}
+{{- $c := $d.contacts -}}
+<section class="hero" id="top">
+  <div class="hero__bg" aria-hidden="true"></div>
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <p class="eyebrow eyebrow--light"><span class="dot" aria-hidden="true"></span>{{ $d.hero.eyebrow }}</p>
+      <h1 class="hero__title">{{ $d.hero.title | safeHTML }}</h1>
+      <p class="hero__lede">{{ $d.hero.lede }}</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary btn--lg" href="#request">Записатися на сервіс</a>
+        <a class="btn btn--glass btn--lg" href="#equipment">Підібрати установку
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <ul class="hero__facts">
+        {{- range $d.hero.facts }}
+        <li><strong>{{ .value }}</strong><span>{{ .label | safeHTML }}</span></li>
+        {{- end }}
+      </ul>
+    </div>
+
+    <form class="quick-form" id="request" data-form aria-labelledby="qf-title" novalidate>
+      <div class="quick-form__head">
+        <h2 id="qf-title">Швидкий запис</h2>
+        <p>Передзвонимо протягом робочого дня</p>
+      </div>
+      <label class="field">
+        <span>Що потрібно?</span>
+        <select name="service" required>
+          {{- range $d.request_services }}<option>{{ . }}</option>{{ end }}
+        </select>
+      </label>
+      <label class="field">
+        <span>Найближча станція</span>
+        <select name="city">
+          {{- range $d.stations }}<option>{{ .city }}</option>{{ end }}
+        </select>
+      </label>
+      <div class="field-row">
+        <label class="field"><span>Ім'я</span><input name="name" autocomplete="name" placeholder="Олександр" required></label>
+        <label class="field"><span>Телефон</span><input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+380" required></label>
+      </div>
+      <button class="btn btn--primary btn--block" type="submit">Надіслати заявку</button>
+      <p class="quick-form__fine">Або телефонуйте: <a href="tel:{{ $c.phone_href }}">{{ $c.phone }}</a></p>
+      <p class="form-success" role="status" hidden>Дякуємо! Заявку прийнято — ми зателефонуємо найближчим часом.</p>
+    </form>
+  </div>
+
+  <div class="hero__trust">
+    <div class="container trust">
+      <span class="trust__label">Працюємо з:</span>
+      <ul class="trust__list">{{ range $d.hero.trust }}<li>{{ . }}</li>{{ end }}</ul>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,12 @@
+{
+  "name": "thermoking-com-ua",
+  "private": true,
+  "scripts": {
+    "build": "hugo --gc --minify --cleanDestinationDir",
+    "build:test": "HUGO_PARAMS_NOINDEX=true hugo --gc --minify --cleanDestinationDir",
+    "deploy:test": "npm run build:test && wrangler pages deploy public --project-name thermoking-com-ua --branch test"
+  },
+  "devDependencies": {
+    "wrangler": "4.159.0"
+  }
+}

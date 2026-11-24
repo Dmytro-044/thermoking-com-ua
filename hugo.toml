@@ -1,0 +1,19 @@
+baseURL = "https://www.thermoking.com.ua/"
+locale = "uk-UA"
+defaultContentLanguage = "uk"
+title = "Термо Кінг Україна"
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term", "rss", "section"]
+
+[params]
+  description = "Офіційний дилер Thermo King в Україні. Продаж, монтаж, планове та гарантійне обслуговування транспортних холодильних установок, продовження ATP, мобільний сервіс, оригінальні запчастини."
+  # Для тестових збірок: HUGO_PARAMS_NOINDEX=true забороняє індексацію.
+  noindex = false
+
+[minify]
+  [minify.tdewolff.html]
+    keepWhitespace = false
+
+[build]
+  [build.buildStats]
+    enable = false

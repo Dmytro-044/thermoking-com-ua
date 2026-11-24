@@ -1,0 +1,26 @@
+{{- $d := hugo.Data.site -}}
+{{- $c := $d.contacts -}}
+{{- $home := "/" | relURL -}}
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      {{ partial "brand.html" (dict "class" "brand--light") }}
+      <p>{{ $d.company.about }}</p>
+    </div>
+    <nav aria-label="Обладнання"><h4>Обладнання</h4><ul>{{ range $d.equipment }}<li><a href="{{ $home }}#equipment">{{ .tag }}</a></li>{{ end }}</ul></nav>
+    <nav aria-label="Сервіс"><h4>Сервіс</h4><ul>{{ range first 4 $d.services }}<li><a href="{{ $home }}#service">{{ .title }}</a></li>{{ end }}<li><a href="{{ $home }}#parts">Запчастини</a></li></ul></nav>
+    <div><h4>Контакти</h4><ul><li><a href="tel:{{ $c.phone_href }}">{{ $c.phone }}</a></li><li><a href="mailto:{{ $c.email }}">{{ $c.email }}</a></li><li>{{ $c.address }}</li><li>{{ $c.hours }}</li></ul></div>
+  </div>
+  <div class="container footer__bottom">
+    <p>© {{ now.Year }} {{ $d.company.legal }}. {{ $d.company.trademark }}</p>
+    <a href="#top">Нагору ↑</a>
+  </div>
+</footer>
+
+<div class="actionbar" aria-label="Швидкі дії">
+  <a class="actionbar__call" href="tel:{{ $c.phone_href }}">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z" fill="currentColor"/></svg>
+    Подзвонити
+  </a>
+  <a class="actionbar__book" href="{{ $home }}#request">Записатися</a>
+</div>

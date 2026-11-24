@@ -1,0 +1,41 @@
+{{- $d := hugo.Data.site -}}
+<section class="section section--dark" id="stations" aria-labelledby="st-title">
+  <div class="container">
+    <div class="section__head section__head--row">
+      <div>
+        <p class="eyebrow eyebrow--light">Сервісна мережа</p>
+        <h2 class="h2" id="st-title">Станції там, де пролягають ваші маршрути</h2>
+      </div>
+      <p class="section__aside">Головний офіс у Києві та сервісні станції в ключових логістичних вузлах країни.</p>
+    </div>
+    <div class="stations">
+      <div class="netmap" aria-hidden="true">
+        <svg viewBox="0 0 600 400" data-netmap>
+          <defs>
+            <pattern id="dots" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="currentColor"/></pattern>
+            <radialGradient id="fade" cx="50%" cy="45%" r="60%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+            <mask id="m"><rect width="600" height="400" fill="url(#fade)"/></mask>
+          </defs>
+          <rect width="600" height="400" fill="url(#dots)" mask="url(#m)" class="netmap__grid"/>
+          <g class="netmap__links"></g>
+          <g class="netmap__nodes"></g>
+        </svg>
+      </div>
+      <ul class="station-list" data-stations>
+        {{- range $d.stations }}
+        <li class="station{{ if .hq }} station--hq{{ end }}" data-city="{{ .id }}" data-name="{{ .city }}" data-lat="{{ .lat }}" data-lon="{{ .lon }}"{{ if .hq }} data-hq{{ end }}>
+          <div>
+            <p class="station__city">{{ .city }}{{ if .hq }} <span class="badge">Головний офіс</span>{{ end }}</p>
+            <p class="station__addr">{{ .address }}</p>
+          </div>
+          {{- if .hq }}
+          <a class="station__link" href="{{ $d.contacts.map_url }}" target="_blank" rel="noopener">Маршрут</a>
+          {{- else }}
+          <a class="station__link" href="#contacts">Контакти</a>
+          {{- end }}
+        </li>
+        {{- end }}
+      </ul>
+    </div>
+  </div>
+</section>

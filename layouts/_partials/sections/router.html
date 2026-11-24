@@ -1,0 +1,22 @@
+{{- $d := hugo.Data.site -}}
+<section class="section section--tight" aria-labelledby="router-title">
+  <div class="container">
+    <div class="section__head section__head--row">
+      <div>
+        <p class="eyebrow">З чого почнемо</p>
+        <h2 class="h2" id="router-title">Що вам потрібно сьогодні?</h2>
+      </div>
+      <p class="section__aside">Оберіть задачу — і перейдіть одразу до потрібної послуги, без пошуку по меню.</p>
+    </div>
+    <ul class="router">
+      {{- range $d.router }}
+      {{- $href := cond (eq .href "tel") (printf "tel:%s" $d.contacts.phone_href) .href }}
+      <li><a class="router__item{{ if .accent }} router__item--accent{{ end }}" href="{{ $href }}">
+        <span class="router__icon">{{ partial "icon.html" .icon }}</span>
+        <span class="router__title">{{ .title }}</span>
+        <span class="router__text">{{ .text }}</span>
+      </a></li>
+      {{- end }}
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,43 @@
+{{- $d := hugo.Data.site -}}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{{- $title := cond .IsHome (printf "%s — продаж і сервіс транспортних рефрижераторів Thermo King" $d.company.legal) (printf "%s — %s" .Title site.Title) }}
+<title>{{ $title }}</title>
+<meta name="description" content="{{ site.Params.description }}">
+{{- if site.Params.noindex }}
+<meta name="robots" content="noindex, nofollow">
+{{- end }}
+<link rel="canonical" href="{{ .Permalink }}">
+<meta name="theme-color" content="#07152a">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="uk_UA">
+<meta property="og:title" content="{{ $d.company.legal }} — холод, на який можна покластися">
+<meta property="og:description" content="{{ site.Params.description }}">
+<meta property="og:url" content="{{ .Permalink }}">
+{{- $img := resources.Get "img/hero-frost.jpg" }}
+{{- $hero := $img.Resize "1920x jpg q78" }}
+{{- $heroSm := $img.Resize "900x jpg q72" }}
+{{- $og := $img.Fill "1200x630 jpg q78" }}
+<meta property="og:image" content="{{ $og.Permalink }}">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%231765d8'/%3E%3Cg stroke='%23fff' stroke-width='2.4' stroke-linecap='round' fill='none'%3E%3Cpath d='M20 8v24M9.6 14l20.8 12M9.6 26l20.8-12'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="{{ $hero.RelPermalink }}" imagesrcset="{{ $heroSm.RelPermalink }} 900w, {{ $hero.RelPermalink }} 1920w" imagesizes="100vw">
+{{- $css := resources.Get "css/styles.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+<style>:root{--hero-img:url("{{ $hero.RelPermalink }}")}@media (max-width:720px){:root{--hero-img:url("{{ $heroSm.RelPermalink }}")}}</style>
+{{- with $d.contacts }}
+<script type="application/ld+json">
+{{ dict
+  "@context" "https://schema.org"
+  "@type" "AutoRepair"
+  "name" $d.company.legal
+  "url" site.BaseURL
+  "telephone" .phone_href
+  "email" .email
+  "openingHours" "Mo-Fr 09:00-18:00"
+  "address" (dict "@type" "PostalAddress" "streetAddress" "вул. Архітектора Вербицького, 1-М" "addressLocality" "Київ" "addressCountry" "UA")
+  | jsonify | safeJS }}
+</script>
+{{- end }}

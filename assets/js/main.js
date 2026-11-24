@@ -45,27 +45,30 @@
   });
 
   /* ---------- service network map ---------- */
-  // Approximate geographic positions (lat/lon) projected to a 600x400 canvas.
-  const cities = {
-    kyiv:     { name: "Київ",    lat: 50.45, lon: 30.52, hq: true },
-    kharkiv:  { name: "Харків",  lat: 49.99, lon: 36.23 },
-    dnipro:   { name: "Дніпро",  lat: 48.46, lon: 35.05 },
-    odesa:    { name: "Одеса",   lat: 46.48, lon: 30.73 },
-    rivne:    { name: "Рівне",   lat: 50.62, lon: 26.25 },
-    cherkasy: { name: "Черкаси", lat: 49.44, lon: 32.06 },
-    haisyn:   { name: "Гайсин",  lat: 48.81, lon: 29.39 },
-  };
+  // Stations come from the list markup (data/site.yaml → data-* attributes).
+  const list = document.querySelector("[data-stations]");
+  const cities = {};
+  if (list) {
+    list.querySelectorAll(".station").forEach((s) => {
+      cities[s.dataset.city] = {
+        name: s.dataset.name,
+        lat: parseFloat(s.dataset.lat),
+        lon: parseFloat(s.dataset.lon),
+        hq: s.hasAttribute("data-hq"),
+      };
+    });
+  }
   const project = ({ lat, lon }) => ({
     x: 50 + ((lon - 25.6) / (37 - 25.6)) * 470,
     y: 40 + ((51 - lat) / (51 - 46.2)) * 320,
   });
   const svg = document.querySelector("[data-netmap]");
-  const list = document.querySelector("[data-stations]");
-  if (svg) {
+  const hqEntry = Object.values(cities).find((c) => c.hq);
+  if (svg && hqEntry) {
     const NS = "http://www.w3.org/2000/svg";
     const links = svg.querySelector(".netmap__links");
     const nodes = svg.querySelector(".netmap__nodes");
-    const hq = project(cities.kyiv);
+    const hq = project(hqEntry);
     Object.entries(cities).forEach(([id, c]) => {
       const p = project(c);
       if (!c.hq) {
@@ -94,7 +97,7 @@
       s.addEventListener("focusin", () => activate(s.dataset.city));
     });
     svg.querySelectorAll(".netmap__node").forEach((n) => n.addEventListener("mouseenter", () => activate(n.dataset.city)));
-    activate("kyiv");
+    activate(Object.keys(cities).find((id) => cities[id].hq));
   }
 
   /* ---------- reveal on scroll ---------- */
